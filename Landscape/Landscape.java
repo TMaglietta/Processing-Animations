@@ -1,4 +1,5 @@
 PImage nordic;
+PVector[] stars;
 color from = color(2, 53, 100);
 color to = color(5, 113, 142);
 
@@ -10,15 +11,27 @@ void setup(){
   
   background(#355F76); //water
   
-  for(int i = 0; i < 268; i++){ //sky
-    stroke(lerpColor(from, to, (float) i/250));
+  for(int i = 0; i < 268; i++) { //sky
+    stroke(lerpColor(from, to, (float) i/269));
     line(0, i, width, i);
   }
-  //image(nordic, 0, 0);
+  
+  stars = new PVector[1000];
+  for(int i = 0; i< stars.length; i++) { //stars
+    float x = random(0, width); 
+    float y = random(0, 268);
+    stars[i] = new PVector(x, y);
+  }
+  for(int i = 0; i < stars.length; i++){
+    fill(255);
+    ellipse(stars[i].x, stars[i].y, 1,1);
+  }
+  
 }
 
 void draw(){ 
   noStroke();
+  
   //rocks
   fill(#131F18);
   beginShape();  //bottom left rock
@@ -86,15 +99,6 @@ void draw(){
     curveVertex(305, 169);
     curveVertex(273, 135);
   endShape(CLOSE);
-  
-  //ellipse(483, 136, 60, 42);
-  //ellipse(254, 227, 48, 42);
-  
-  
-  //stroke(#74EE97);
-  //strokeWeight(10);
-  //line(474, 144, 258, 211);
-  //curve(436, 177, 341, 203, 474, 144, 258, 211);
 }
 
 void mouseClicked() {

@@ -1,0 +1,124 @@
+PImage nordic;
+PVector[] stars;
+PVector moon;
+color from = color(2, 53, 100);
+color to = color(5, 113, 142);
+
+void setup(){
+  size(640, 427);
+  //surface.setResizable(true);
+  nordic = loadImage("NordicLandscape.jpg");
+  
+  
+  background(#355F76); //water
+  
+  
+  
+  stars = new PVector[1000];
+  for(int i = 0; i< stars.length; i++) { //stars' positions
+    float x = random(0, width); 
+    float y = random(0, 268);
+    stars[i] = new PVector(x, y);
+  }
+  
+  moon = new PVector(534, 253);
+  
+    
+}
+
+void draw(){ 
+  noStroke();
+  //sky
+  for(int i = 0; i < 268; i++) {                 //putting this here 
+    stroke(lerpColor(from, to, (float) i/269));  //creates a fading effect in the stars
+    line(0, i, width, i);                        //put in setup for clear stars
+  }
+  
+  
+  //draw stars
+  for(int i = 0; i < stars.length; i++){
+    fill(255);
+    ellipse(stars[i].x, stars[i].y, 1, 1);
+  }  
+  
+  if(moon.y > 86){
+    moon.y -= 1;
+    moon.x -= 1;
+  }else{
+    moon.y += 0;
+  }
+  //moon
+  ellipse(moon.x, moon.y, 75, 75);
+  
+  //rocks
+  fill(#131F18);
+  beginShape();  //bottom left rock
+    vertex(20, 423);
+    vertex(8, 362);
+    vertex(21, 302);
+    vertex(119, 308);
+    vertex(177, 328);
+    vertex(98, 409);
+    vertex(61, 424);
+  endShape(CLOSE);
+
+  beginShape(); //big group of rocks
+    vertex(170, 333);
+    vertex(188, 344);
+    vertex(303, 376);
+    vertex(270, 407);
+    vertex(349, 415);
+    vertex(332, 386);
+    vertex(422, 380);
+    vertex(640, 401);
+    vertex(640, 256);
+    vertex(500, 256);
+    vertex(342, 271);
+    vertex(339, 282);
+    vertex(196, 272);
+    vertex(141, 299);
+    vertex(193, 304);
+  endShape(CLOSE);
+  //mountains
+  fill(#6E8BA1);
+  
+  beginShape();
+    vertex(230, 268);
+    vertex(180, 244);
+    vertex(126, 248);
+    vertex(102, 240);
+    vertex(50, 250);
+    vertex(17, 243);
+    vertex(10, 246);
+    vertex(0, 243);
+    vertex(0, 268);
+  endShape();
+  
+  //aurora
+  fill(#74EE97);
+  //noFill();
+  beginShape(); // top
+    vertex(386, 0);
+    vertex(306, 0);
+    curveVertex(306, 0);
+    curveVertex(240, 58);
+    curveVertex(258, 165);
+    curveVertex(296, 73);
+    curveVertex(380, 0);
+    curveVertex(358, 36);
+  endShape(CLOSE);
+  
+  beginShape(); //little C shape
+    curveVertex(273, 135);
+    curveVertex(273, 135);
+    curveVertex(326, 172);//outer cuve
+    curveVertex(263, 191);
+    curveVertex(263, 191);
+    curveVertex(305, 169);
+    curveVertex(273, 135);
+  endShape(CLOSE);
+}
+
+void mouseClicked() {
+  println(mouseX, mouseY); 
+}
